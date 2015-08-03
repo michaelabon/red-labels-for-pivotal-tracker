@@ -22,8 +22,16 @@ chrome.extension.sendMessage({}, function(response) {
         mutations.forEach(function (mutation) {
           Array.prototype.forEach.call(mutation.addedNodes, function(addedNode) {
             if (typeof addedNode.getElementsByClassName !== 'undefined') {
-              var labels = addedNode.getElementsByClassName('label');
-              colorLabelNodes(labels);
+              var previews = addedNode.getElementsByClassName('preview');
+              if (previews.length === 0) { return; }
+
+              var labels = Array.prototype.filter.call(previews, function(preview) {
+                return preview.getElementsByClassName !== 'undefined';
+              }).map(function(preview) {
+                return Array.prototype.slice.call(preview.getElementsByClassName('label'));
+              });
+
+              colorLabelNodes(Array.prototype.concat.apply([], labels));
             }
           });
         });
