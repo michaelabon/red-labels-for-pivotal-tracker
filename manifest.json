@@ -1,9 +1,9 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
-  "version": "0.0.1",
+  "name": "Colored Labels for Pivotal Tracker",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Want to see which Pivotal Tracker stories you can work on? Turn any blocked stories red.",
+  "homepage_url": "https://github.com/mkenyon/colored-labels-for-pivotal-tracker",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
