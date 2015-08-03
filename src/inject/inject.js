@@ -11,7 +11,7 @@ chrome.extension.sendMessage({}, function(response) {
       function colorLabelNodes(labels) {
         Object.keys(colorMapping).forEach(function(labelKeyword) {
           Array.prototype.filter.call(labels, function(label) {
-            return label.textContent.indexOf(labelKeyword) === 0
+            return label.textContent.indexOf(labelKeyword) >= 0;
           }).forEach(function(label) {
             label.style.color = colorMapping[labelKeyword];
           });
