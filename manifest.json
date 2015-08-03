@@ -1,9 +1,9 @@
 {
-  "name": "Colored Labels for Pivotal Tracker",
+  "name": "Red Labels for Pivotal Tracker",
   "version": "1.0.1",
   "manifest_version": 2,
   "description": "Want to see which Pivotal Tracker stories you can work on? Turn any \"blocked\" or \"needs <something>\" stories red so they stand out!",
-  "homepage_url": "https://github.com/mkenyon/colored-labels-for-pivotal-tracker",
+  "homepage_url": "https://github.com/mkenyon/red-labels-for-pivotal-tracker",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -14,6 +14,7 @@
     "http://www.pivotaltracker.com/*",
     "https://www.pivotaltracker.com/*"
   ],
+  "short_name": "Red Labels",
   "content_scripts": [
     {
       "matches": [
