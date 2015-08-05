@@ -3,37 +3,48 @@ chrome.extension.sendMessage({}, function(response) {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
-      var colorMapping = {
-        'blocked': 'rgb(199, 37, 67)',
-        'needs ': 'rgb(199, 37, 67)'
-      };
+      var eligibleLabels = [
+        /^blocked\b/,
+        /^needs\b/
+      ];
 
       function colorLabelNodes(labels) {
-        Object.keys(colorMapping).forEach(function(labelKeyword) {
+        eligibleLabels.forEach(function(eligibleLabel) {
           Array.prototype.filter.call(labels, function(label) {
-            return label.textContent.indexOf(labelKeyword) >= 0;
+            return label.textContent.match(eligibleLabel)
           }).forEach(function(label) {
-            label.style.color = colorMapping[labelKeyword];
+            label.textContent = label.textContent.trim();
+            label.style.backgroundColor = 'rgb(199, 37, 67)';
+            label.style.color = 'white';
+            label.style.padding = '1px 6px 1px 6px';
+            label.style.margin = '0 2px';
+            label.style.borderRadius = '20px';
+
+            if (label.textContent.charAt(label.textContent.length - 1) === ',') {
+              label.style.paddingRight = '5px';
+            }
           });
         });
       }
 
+      function colorLabelsInNode(addedNode) {
+        if (typeof addedNode.getElementsByClassName !== 'undefined') {
+          var previews = addedNode.getElementsByClassName('preview');
+          if (previews.length === 0) { return; }
+
+          var labels = Array.prototype.filter.call(previews, function(preview) {
+            return preview.getElementsByClassName !== 'undefined';
+          }).map(function(preview) {
+            return Array.prototype.slice.call(preview.getElementsByClassName('label'));
+          });
+
+          colorLabelNodes(Array.prototype.concat.apply([], labels));
+        }
+      }
+
       var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
-          Array.prototype.forEach.call(mutation.addedNodes, function(addedNode) {
-            if (typeof addedNode.getElementsByClassName !== 'undefined') {
-              var previews = addedNode.getElementsByClassName('preview');
-              if (previews.length === 0) { return; }
-
-              var labels = Array.prototype.filter.call(previews, function(preview) {
-                return preview.getElementsByClassName !== 'undefined';
-              }).map(function(preview) {
-                return Array.prototype.slice.call(preview.getElementsByClassName('label'));
-              });
-
-              colorLabelNodes(Array.prototype.concat.apply([], labels));
-            }
-          });
+          Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
         });
       });
 
@@ -41,6 +52,8 @@ chrome.extension.sendMessage({}, function(response) {
       var config = { childList: true, subtree: true };
 
       observer.observe(document, config);
+
+      colorLabelsInNode(document)
     }
   }, 10);
 });
