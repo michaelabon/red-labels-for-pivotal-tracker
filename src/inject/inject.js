@@ -9,6 +9,9 @@ chrome.extension.sendMessage({}, function(response) {
         }).forEach(function(label) {
           label.classList.add('blocked');
 
+          // Handle wrapping in conjunction with white-space: nowrap;
+          label.insertAdjacentHTML('afterend', '<span> </span>');
+
           // Handle spacing after comma
           label.textContent = label.textContent.trim();
           if (label.textContent.charAt(label.textContent.length - 1) === ',') {
