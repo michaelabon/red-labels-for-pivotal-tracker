@@ -24,6 +24,10 @@ describe('isLabelEligible', function () {
       expect(isLabelEligible('▩▩ blocked ▩▩')).toEqual(true);
     });
 
+    it('✖ needs backend story ✖', function () {
+      expect(isLabelEligible('✖ needs backend story ✖')).toEqual(true);
+    });
+
     it('-blocked-', function () {
       expect(isLabelEligible('-blocked-')).toEqual(true);
     });
