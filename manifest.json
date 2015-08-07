@@ -25,6 +25,9 @@
       "js": [
         "src/inject/isLabelEligible.js",
         "src/inject/inject.js"
+      ],
+      "css": [
+        "css/inject/inject.css"
       ]
     }
   ]

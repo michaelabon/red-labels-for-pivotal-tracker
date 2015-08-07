@@ -1,0 +1,7 @@
+.tracker_markup .label.blocked {
+  background-color: rgb(199, 37, 67);
+  border-radius: 20px;
+  color: white;
+  margin: 0 2px;
+  padding: 1px 6px 1px 6px;
+}

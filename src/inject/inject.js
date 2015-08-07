@@ -7,13 +7,10 @@ chrome.extension.sendMessage({}, function(response) {
         Array.prototype.filter.call(labels, function(label) {
           return isLabelEligible(label.textContent);
         }).forEach(function(label) {
-          label.textContent = label.textContent.trim();
-          label.style.backgroundColor = 'rgb(199, 37, 67)';
-          label.style.color = 'white';
-          label.style.padding = '1px 6px 1px 6px';
-          label.style.margin = '0 2px';
-          label.style.borderRadius = '20px';
+          label.classList.add('blocked');
 
+          // Handle spacing after comma
+          label.textContent = label.textContent.trim();
           if (label.textContent.charAt(label.textContent.length - 1) === ',') {
             label.style.paddingRight = '5px';
           }
