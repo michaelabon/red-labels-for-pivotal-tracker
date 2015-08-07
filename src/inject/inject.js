@@ -3,27 +3,20 @@ chrome.extension.sendMessage({}, function(response) {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
-      var eligibleLabels = [
-        /^blocked\b/,
-        /^needs\b/
-      ];
-
       function colorLabelNodes(labels) {
-        eligibleLabels.forEach(function(eligibleLabel) {
-          Array.prototype.filter.call(labels, function(label) {
-            return label.textContent.match(eligibleLabel)
-          }).forEach(function(label) {
-            label.textContent = label.textContent.trim();
-            label.style.backgroundColor = 'rgb(199, 37, 67)';
-            label.style.color = 'white';
-            label.style.padding = '1px 6px 1px 6px';
-            label.style.margin = '0 2px';
-            label.style.borderRadius = '20px';
+        Array.prototype.filter.call(labels, function(label) {
+          return isLabelEligible(label.textContent);
+        }).forEach(function(label) {
+          label.textContent = label.textContent.trim();
+          label.style.backgroundColor = 'rgb(199, 37, 67)';
+          label.style.color = 'white';
+          label.style.padding = '1px 6px 1px 6px';
+          label.style.margin = '0 2px';
+          label.style.borderRadius = '20px';
 
-            if (label.textContent.charAt(label.textContent.length - 1) === ',') {
-              label.style.paddingRight = '5px';
-            }
-          });
+          if (label.textContent.charAt(label.textContent.length - 1) === ',') {
+            label.style.paddingRight = '5px';
+          }
         });
       }
 

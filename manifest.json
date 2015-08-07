@@ -23,6 +23,7 @@
         "https://www.pivotaltracker.com/*"
       ],
       "js": [
+        "src/inject/isLabelEligible.js",
         "src/inject/inject.js"
       ]
     }
