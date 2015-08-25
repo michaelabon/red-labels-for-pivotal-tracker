@@ -1,3 +1,16 @@
+## v1.2.2: Mutation Observers
+
+### Fixes
+
+- Bulk removing now works correctly (#3)
+- Once again, blocked label in detail view is highlighted and can be interacted with (#6)
+
+## v1.2.1
+
+### Fixes
+
+- Embarrassing use of an interval to automatically color the label nodes.
+
 ## v1.2.0 Prevent Wrapping; More Matching
 
 Two visible changes with this release!
