@@ -3,7 +3,7 @@ chrome.extension.sendMessage({}, function(response) {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
-      function colorLabelNodes(labels) {
+      var colorLabelNodes = function colorLabelNodes(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
             label.classList.add('blocked');
@@ -13,7 +13,7 @@ chrome.extension.sendMessage({}, function(response) {
         });
       }
 
-      function getPreviewLabelsInNode(containingNode) {
+      var getPreviewLabelsInNode = function getPreviewLabelsInNode(containingNode) {
         var previews = containingNode.getElementsByClassName('preview');
 
         return Array.prototype.filter.call(previews, function(preview) {
@@ -23,11 +23,11 @@ chrome.extension.sendMessage({}, function(response) {
         });
       }
 
-      function nodeIsElement(node) {
+      var nodeIsElement = function nodeIsElement(node) {
         return (typeof node.getElementsByClassName !== 'undefined');
       }
 
-      function colorLabelsInNode(addedNode) {
+      var colorLabelsInNode = function colorLabelsInNode(addedNode) {
         if (!nodeIsElement(addedNode)) {
           return;
         }
@@ -37,7 +37,7 @@ chrome.extension.sendMessage({}, function(response) {
         colorLabelNodes(Array.prototype.concat.apply([], labels));
       }
 
-      function handleMutationEvents(mutation) {
+      var handleMutationEvents = function handleMutationEvents(mutation) {
         Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
         colorLabelsInNode(mutation.target);
       }
