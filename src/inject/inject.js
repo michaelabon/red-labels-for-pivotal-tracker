@@ -32,14 +32,8 @@ chrome.extension.sendMessage({}, function(response) {
         colorLabelNodes(Array.prototype.concat.apply([], labels));
       }
 
-      var colorLabelNodes = function colorLabelNodes(labels) {
-        Array.prototype.forEach.call(labels, function(label) {
-          if (isLabelEligible(label.textContent)) {
-            label.classList.add('blocked');
-          } else {
-            label.classList.remove('blocked');
-          }
-        });
+      var nodeIsElement = function nodeIsElement(node) {
+        return (typeof node.getElementsByClassName !== 'undefined');
       }
 
       var getPreviewLabelsInNode = function getPreviewLabelsInNode(containingNode) {
@@ -52,8 +46,14 @@ chrome.extension.sendMessage({}, function(response) {
         });
       }
 
-      var nodeIsElement = function nodeIsElement(node) {
-        return (typeof node.getElementsByClassName !== 'undefined');
+      var colorLabelNodes = function colorLabelNodes(labels) {
+        Array.prototype.forEach.call(labels, function(label) {
+          if (isLabelEligible(label.textContent)) {
+            label.classList.add('blocked');
+          } else {
+            label.classList.remove('blocked');
+          }
+        });
       }
     }
   }, 10);
