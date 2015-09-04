@@ -13,26 +13,37 @@ chrome.extension.sendMessage({}, function(response) {
         });
       }
 
-      function colorLabelsInNode(addedNode) {
-        if (typeof addedNode.getElementsByClassName !== 'undefined') {
-          var previews = addedNode.getElementsByClassName('preview');
-          if (previews.length === 0) { return; }
+      function getPreviewLabelsInNode(containingNode) {
+        var previews = containingNode.getElementsByClassName('preview');
 
-          var labels = Array.prototype.filter.call(previews, function(preview) {
-            return preview.getElementsByClassName !== 'undefined';
-          }).map(function(preview) {
-            return Array.prototype.slice.call(preview.getElementsByClassName('label'));
-          });
-
-          colorLabelNodes(Array.prototype.concat.apply([], labels));
-        }
+        return Array.prototype.filter.call(previews, function(preview) {
+          return preview.getElementsByClassName !== 'undefined';
+        }).map(function(preview) {
+          return Array.prototype.slice.call(preview.getElementsByClassName('label'));
+        });
       }
 
-      var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
-          colorLabelsInNode(mutation.target);
-        });
+      function nodeIsElement(node) {
+        return (typeof node.getElementsByClassName !== 'undefined');
+      }
+
+      function colorLabelsInNode(addedNode) {
+        if (!nodeIsElement(addedNode)) {
+          return;
+        }
+
+        var labels = getPreviewLabelsInNode(addedNode);
+
+        colorLabelNodes(Array.prototype.concat.apply([], labels));
+      }
+
+      function handleMutationEvents(mutation) {
+        Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
+        colorLabelsInNode(mutation.target);
+      }
+
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(handleMutationEvents);
       });
 
       // configuration of the observer:
