@@ -18,13 +18,13 @@ chrome.extension.sendMessage({}, function(response) {
       observer.observe(document, config);
 
       var handleMutationEvents = function handleMutationEvents(mutation) {
-        Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
-        colorLabelsInNode(mutation.target);
+        Array.prototype.forEach.call(mutation.addedNodes, styleLabelsInNode);
+        styleLabelsInNode(mutation.target);
       }
 
-      var colorLabelsInNode = function colorLabelsInNode(node) {
+      var styleLabelsInNode = function styleLabelsInNode(node) {
         if (nodeIsElement(node)) {
-          colorLabelNodes(findLabelsInNode(node));
+          styleLabels(findLabelsInNode(node));
         }
       }
 
@@ -36,7 +36,7 @@ chrome.extension.sendMessage({}, function(response) {
         return node.querySelectorAll('a.label');
       }
 
-      var colorLabelNodes = function colorLabelNodes(labels) {
+      var styleLabels = function styleLabels(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
             label.classList.add('blocked');
