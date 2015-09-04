@@ -22,6 +22,16 @@ chrome.extension.sendMessage({}, function(response) {
         colorLabelsInNode(mutation.target);
       }
 
+      var colorLabelsInNode = function colorLabelsInNode(addedNode) {
+        if (!nodeIsElement(addedNode)) {
+          return;
+        }
+
+        var labels = getPreviewLabelsInNode(addedNode);
+
+        colorLabelNodes(Array.prototype.concat.apply([], labels));
+      }
+
       var colorLabelNodes = function colorLabelNodes(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
@@ -44,16 +54,6 @@ chrome.extension.sendMessage({}, function(response) {
 
       var nodeIsElement = function nodeIsElement(node) {
         return (typeof node.getElementsByClassName !== 'undefined');
-      }
-
-      var colorLabelsInNode = function colorLabelsInNode(addedNode) {
-        if (!nodeIsElement(addedNode)) {
-          return;
-        }
-
-        var labels = getPreviewLabelsInNode(addedNode);
-
-        colorLabelNodes(Array.prototype.concat.apply([], labels));
       }
     }
   }, 10);
