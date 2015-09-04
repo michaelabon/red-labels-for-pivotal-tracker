@@ -17,6 +17,11 @@ chrome.extension.sendMessage({}, function(response) {
 
       observer.observe(document, config);
 
+      var handleMutationEvents = function handleMutationEvents(mutation) {
+        Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
+        colorLabelsInNode(mutation.target);
+      }
+
       var colorLabelNodes = function colorLabelNodes(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
@@ -50,13 +55,6 @@ chrome.extension.sendMessage({}, function(response) {
 
         colorLabelNodes(Array.prototype.concat.apply([], labels));
       }
-
-      var handleMutationEvents = function handleMutationEvents(mutation) {
-        Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
-        colorLabelsInNode(mutation.target);
-      }
-
-
     }
   }, 10);
 });
