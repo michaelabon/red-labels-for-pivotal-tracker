@@ -6,3 +6,13 @@
   padding: 1px 6px 1px 6px;
   white-space: nowrap;
 }
+
+.labels_maker .selected.labels li a.label.blocked,
+.labels_maker .selected.labels li a.label.blocked + a.remove {
+  background-color: hsl(349, 69%, 46%);
+}
+
+.labels_maker .selected.labels li a.label.blocked:hover,
+.labels_maker .selected.labels li a.label.blocked + a.remove:hover {
+  background-color: hsl(349, 69%, 32%);
+}
