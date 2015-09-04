@@ -1,4 +1,4 @@
-.tracker_markup .label.blocked {
+.preview a.label.blocked {
   background-color: rgb(199, 37, 67);
   border-radius: 20px;
   color: white;
