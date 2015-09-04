@@ -1,3 +1,10 @@
+## v1.3.0: Red Details
+
+### Enhancements
+
+- Your story details now sport Red Labels! That's right! The inspiration for the style
+  now the same red that you know and love. It even gets darker when you hover over it.
+  
 ## v1.2.2: Mutation Observers
 
 ### Fixes
