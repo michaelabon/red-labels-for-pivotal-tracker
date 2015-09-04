@@ -3,6 +3,20 @@ chrome.extension.sendMessage({}, function(response) {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(handleMutationEvents);
+      });
+
+      // configuration of the observer:
+      var config = {
+        attributes: true,
+        characterData: true,
+        childList: true,
+        subtree: true
+      };
+
+      observer.observe(document, config);
+
       var colorLabelNodes = function colorLabelNodes(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
@@ -42,19 +56,7 @@ chrome.extension.sendMessage({}, function(response) {
         colorLabelsInNode(mutation.target);
       }
 
-      var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(handleMutationEvents);
-      });
 
-      // configuration of the observer:
-      var config = {
-        attributes: true,
-        characterData: true,
-        childList: true,
-        subtree: true
-      };
-
-      observer.observe(document, config);
     }
   }, 10);
 });
