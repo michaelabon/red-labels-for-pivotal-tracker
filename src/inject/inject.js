@@ -29,7 +29,7 @@ chrome.extension.sendMessage({}, function(response) {
       }
 
       var nodeIsElement = function nodeIsElement(node) {
-        return (typeof node.getElementsByClassName !== 'undefined');
+        return (typeof node.querySelectorAll !== 'undefined');
       }
 
       var findLabelsInNode = function findLabelsInNode(node) {
