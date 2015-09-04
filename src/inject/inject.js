@@ -3,36 +3,8 @@ chrome.extension.sendMessage({}, function(response) {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
-      function colorLabelNodes(labels) {
-        Array.prototype.forEach.call(labels, function(label) {
-          if (isLabelEligible(label.textContent)) {
-            label.classList.add('blocked');
-          } else {
-            label.classList.remove('blocked');
-          }
-        });
-      }
-
-      function colorLabelsInNode(addedNode) {
-        if (typeof addedNode.getElementsByClassName !== 'undefined') {
-          var previews = addedNode.getElementsByClassName('preview');
-          if (previews.length === 0) { return; }
-
-          var labels = Array.prototype.filter.call(previews, function(preview) {
-            return preview.getElementsByClassName !== 'undefined';
-          }).map(function(preview) {
-            return Array.prototype.slice.call(preview.getElementsByClassName('label'));
-          });
-
-          colorLabelNodes(Array.prototype.concat.apply([], labels));
-        }
-      }
-
       var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          Array.prototype.forEach.call(mutation.addedNodes, colorLabelsInNode);
-          colorLabelsInNode(mutation.target);
-        });
+        mutations.forEach(handleMutationEvents);
       });
 
       // configuration of the observer:
@@ -44,6 +16,35 @@ chrome.extension.sendMessage({}, function(response) {
       };
 
       observer.observe(document, config);
+
+      var handleMutationEvents = function handleMutationEvents(mutation) {
+        Array.prototype.forEach.call(mutation.addedNodes, styleLabelsInNode);
+        styleLabelsInNode(mutation.target);
+      }
+
+      var styleLabelsInNode = function styleLabelsInNode(node) {
+        if (nodeIsElement(node)) {
+          styleLabels(findLabelsInNode(node));
+        }
+      }
+
+      var nodeIsElement = function nodeIsElement(node) {
+        return (typeof node.querySelectorAll !== 'undefined');
+      }
+
+      var findLabelsInNode = function findLabelsInNode(node) {
+        return node.querySelectorAll('a.label');
+      }
+
+      var styleLabels = function styleLabels(labels) {
+        Array.prototype.forEach.call(labels, function(label) {
+          if (isLabelEligible(label.textContent)) {
+            label.classList.add('blocked');
+          } else {
+            label.classList.remove('blocked');
+          }
+        });
+      }
     }
   }, 10);
 });
