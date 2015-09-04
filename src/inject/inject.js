@@ -22,28 +22,18 @@ chrome.extension.sendMessage({}, function(response) {
         colorLabelsInNode(mutation.target);
       }
 
-      var colorLabelsInNode = function colorLabelsInNode(addedNode) {
-        if (!nodeIsElement(addedNode)) {
-          return;
+      var colorLabelsInNode = function colorLabelsInNode(node) {
+        if (nodeIsElement(node)) {
+          colorLabelNodes(findLabelsInNode(node));
         }
-
-        var labels = getPreviewLabelsInNode(addedNode);
-
-        colorLabelNodes(Array.prototype.concat.apply([], labels));
       }
 
       var nodeIsElement = function nodeIsElement(node) {
         return (typeof node.getElementsByClassName !== 'undefined');
       }
 
-      var getPreviewLabelsInNode = function getPreviewLabelsInNode(containingNode) {
-        var previews = containingNode.getElementsByClassName('preview');
-
-        return Array.prototype.filter.call(previews, function(preview) {
-          return preview.getElementsByClassName !== 'undefined';
-        }).map(function(preview) {
-          return Array.prototype.slice.call(preview.getElementsByClassName('label'));
-        });
+      var findLabelsInNode = function findLabelsInNode(node) {
+        return node.querySelectorAll('a.label');
       }
 
       var colorLabelNodes = function colorLabelNodes(labels) {
