@@ -27,11 +27,11 @@
 }
 
 .labels_maker .selected.labels li b.label.planner,
-.labels_maker .selected.labels li b.label.planner + a.remove {
+.labels_maker .selected.labels li b.label.planner + b.remove {
   background-color: hsl(180, 43%, 39%);
 }
 
 .labels_maker .selected.labels li b.label.planner:hover,
-.labels_maker .selected.labels li b.label.planner + a.remove:hover {
+.labels_maker .selected.labels li b.label.planner + b.remove:hover {
   background-color: hsl(180, 43%, 39%);
 }
