@@ -1,3 +1,9 @@
+## v1.3.1: Blue Labels!
+
+### Enhancements
+
+- Your stories now support Blue Labels! Use the "planner" label to highlight stories you need to estimate for next planner. 
+
 ## v1.3.0: Red Details
 
 ### Enhancements
