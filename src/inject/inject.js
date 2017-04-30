@@ -47,14 +47,12 @@ chrome.extension.sendMessage({}, function(response) {
           } else {
             label.classList.remove('blocked');    
           }
-          
-      var styleLabels = function styleLabels(labels) {
-        Array.prototype.forEach.call(labels, function(label) {
           if (isLabelBlue(label.textContent)) {
             label.classList.add('planner');
           } else {
-            label.classList.remove('planner');
+            label.classList.remove('planner');    
           }
+            
         });
       }
     }
