@@ -42,7 +42,7 @@ chrome.extension.sendMessage({}, function(response) {
 
       var styleLabels = function styleLabels(labels) {
         Array.prototype.forEach.call(labels, function(label) {
-          if (isLabelEligible(label.textContent)) {
+          if (isLabelRed(label.textContent)) {
             label.classList.add('blocked');
           } else {
             label.classList.remove('blocked');    
@@ -50,7 +50,7 @@ chrome.extension.sendMessage({}, function(response) {
           
       var styleLabels = function styleLabels(labels) {
         Array.prototype.forEach.call(labels, function(label) {
-          if (isLabelEligible(label.textContent)) {
+          if (isLabelBlue(label.textContent)) {
             label.classList.add('planner');
           } else {
             label.classList.remove('planner');
