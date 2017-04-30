@@ -35,13 +35,25 @@ chrome.extension.sendMessage({}, function(response) {
       var findLabelsInNode = function findLabelsInNode(node) {
         return node.querySelectorAll('a.label');
       }
+      
+      var findLabelsInNode = function findLabelsInNode(node) {
+        return node.querySelectorAll('b.label');
+      }
 
       var styleLabels = function styleLabels(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
             label.classList.add('blocked');
           } else {
-            label.classList.remove('blocked');
+            label.classList.remove('blocked');    
+          }
+          
+      var styleLabels = function styleLabels(labels) {
+        Array.prototype.forEach.call(labels, function(label) {
+          if (isLabelEligible(label.textContent)) {
+            label.classList.add('planner');
+          } else {
+            label.classList.remove('planner');
           }
         });
       }
