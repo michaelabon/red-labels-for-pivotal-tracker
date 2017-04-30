@@ -16,3 +16,22 @@
 .labels_maker .selected.labels li a.label.blocked + a.remove:hover {
   background-color: hsl(349, 69%, 32%);
 }
+
+.preview b.label.planner {
+  background-color: hsl(180, 43%, 39%));
+  border-radius: 20px;
+  color: white;
+  margin: 0 2px;
+  padding: 1px 6px 1px 6px;
+  white-space: nowrap;
+}
+
+.labels_maker .selected.labels li b.label.planner,
+.labels_maker .selected.labels li b.label.planner + a.remove {
+  background-color: hsl(180, 43%, 39%);
+}
+
+.labels_maker .selected.labels li b.label.planner:hover,
+.labels_maker .selected.labels li b.label.planner + a.remove:hover {
+  background-color: hsl(180, 43%, 39%);
+}
