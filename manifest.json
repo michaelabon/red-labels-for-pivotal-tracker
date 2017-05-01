@@ -24,7 +24,7 @@
       ],
       "js": [
         "src/inject/isLabelRed.js",
-        "src/inject/isLabelBlue
+        "src/inject/isLabelBlue,
         "src/inject/inject.js"
       ],
       "css": [
