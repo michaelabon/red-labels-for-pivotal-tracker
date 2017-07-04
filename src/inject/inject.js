@@ -43,6 +43,11 @@ chrome.extension.sendMessage({}, function(response) {
           } else {
             label.classList.remove('blocked');
           }
+          if (isTestLabelEligible(label.textContent)) {
+            label.classList.add('failed');
+          } else {
+            label.classList.remove('failed');
+          }
         });
       }
     }
