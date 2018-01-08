@@ -7,12 +7,14 @@
   white-space: nowrap;
 }
 
-.labels_maker .selected.labels li a.label.blocked,
-.labels_maker .selected.labels li a.label.blocked + a.remove {
+.full .blocked,
+.full .blocked ~ [data-aid="Label__RemoveButton"]
+{
   background-color: hsl(349, 69%, 46%);
 }
 
-.labels_maker .selected.labels li a.label.blocked:hover,
-.labels_maker .selected.labels li a.label.blocked + a.remove:hover {
+.full .blocked:hover,
+.full .blocked ~ [data-aid="Label__RemoveButton"]:hover
+{
   background-color: hsl(349, 69%, 32%);
 }

@@ -1,3 +1,9 @@
+## v1.3.1: Red Details, again
+
+### Fixes
+
+- The new, rectangular look of the story details broke my styling. This release catches up to Tracker's new styling.
+
 ## v1.3.0: Red Details
 
 ### Enhancements

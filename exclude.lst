@@ -1,5 +1,7 @@
-.git
-node_modules
-test
+.git/*
+node_modules/*
+test/*
 exclude.lst
 karma.conf.js
+screenshots/*
+build/*

@@ -1,4 +1,36 @@
-chrome.extension.sendMessage({}, function(response) {
+(function(response) {
+  function handleMutationEvents(mutation) {
+    Array.prototype.forEach.call(mutation.addedNodes, styleLabelsInNode);
+    styleLabelsInNode(mutation.target);
+  }
+
+  function styleLabelsInNode(node) {
+    if (nodeIsElement(node)) {
+      styleLabels(findLabelsInNode(node));
+    }
+  }
+
+  function nodeIsElement(node) {
+    return (typeof node.querySelectorAll !== 'undefined');
+  }
+
+  function findLabelsInNode(node) {
+    var listViewLabels = Array.from(node.querySelectorAll('a.label'));
+    var detailedViews = Array.from(node.querySelectorAll('[data-aid="Label__Name"]'));
+
+    return listViewLabels.concat(detailedViews);
+  }
+
+  function styleLabels(labels) {
+    Array.prototype.forEach.call(labels, function(label) {
+      if (isLabelEligible(label.textContent)) {
+        label.classList.add('blocked');
+      } else {
+        label.classList.remove('blocked');
+      }
+    });
+  }
+
   var readyStateCheckInterval = setInterval(function() {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
@@ -17,34 +49,6 @@ chrome.extension.sendMessage({}, function(response) {
 
       observer.observe(document, config);
 
-      var handleMutationEvents = function handleMutationEvents(mutation) {
-        Array.prototype.forEach.call(mutation.addedNodes, styleLabelsInNode);
-        styleLabelsInNode(mutation.target);
-      }
-
-      var styleLabelsInNode = function styleLabelsInNode(node) {
-        if (nodeIsElement(node)) {
-          styleLabels(findLabelsInNode(node));
-        }
-      }
-
-      var nodeIsElement = function nodeIsElement(node) {
-        return (typeof node.querySelectorAll !== 'undefined');
-      }
-
-      var findLabelsInNode = function findLabelsInNode(node) {
-        return node.querySelectorAll('a.label');
-      }
-
-      var styleLabels = function styleLabels(labels) {
-        Array.prototype.forEach.call(labels, function(label) {
-          if (isLabelEligible(label.textContent)) {
-            label.classList.add('blocked');
-          } else {
-            label.classList.remove('blocked');
-          }
-        });
-      }
     }
   }, 10);
-});
+}());
